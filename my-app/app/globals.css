@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+.coin-container {
+  position: relative;
+
+  cursor: pointer;  
+} 
+
+.coin {
+  width: 100%;
+  height: 100%;
+  background-image: url('../public/rect-head.png'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center; 
+  transition: transform 2s linear; 
+}
+
+.coin-container.active .coin {
+  animation: coin-spin-realistic 2s linear 1; 
+}
+
+@keyframes coin-spin-realistic {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(360deg) scale(2);
+  }
+  100% {
+    transform: rotateX(720deg) scale(1);
+  }
+}
+
+.ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  border: 4px solid lightsalmon;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple-expand 0.6s ease-out forwards;
+  animation-delay: 2s;
+  opacity: 0;
+}
+
+
+@keyframes ripple-expand {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
